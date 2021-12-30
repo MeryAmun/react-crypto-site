@@ -18,7 +18,7 @@ import {
 
 import HTMLReactParser from 'html-react-parser'
 import { LineChart } from './LineChart'
-import Loader from './Loader'
+import { Loader } from './Loader'
 import millify from 'millify'
 import { useParams } from 'react-router-dom'
 
