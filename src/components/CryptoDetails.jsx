@@ -31,6 +31,7 @@ export const CryptoDetails = () => {
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
   const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod })
   const cryptoDetails = data?.data?.coin
+  console.log(data)
 
   if (isFetching) return <Loader />
 
@@ -39,7 +40,7 @@ export const CryptoDetails = () => {
   const stats = [
     {
       title: 'Price to USD',
-      value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`,
+      value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`,
       icon: <DollarCircleOutlined />,
     },
     { title: 'Rank', value: cryptoDetails.rank, icon: <NumberOutlined /> },
