@@ -10,9 +10,12 @@ export const LineChart = ({ coinHistory, currentPrice, coinName }) => {
   const coinTimestamp = []
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinPrice.push(coinHistory.data.history[1].price)
+    coinPrice.push(coinHistory?.data?.history[i].price)
+  }
+
+  for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
     coinTimestamp.push(
-      new Date(coinHistory.data.history[1].timestamp).toLocaleDateString()
+      new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString()
     )
   }
 
@@ -20,7 +23,7 @@ export const LineChart = ({ coinHistory, currentPrice, coinName }) => {
     labels: coinTimestamp,
     datasets: [
       {
-        label: 'Price in USD',
+        label: 'Price In USD',
         data: coinPrice,
         fill: false,
         backgroundColor: '#0071bd',
@@ -31,7 +34,7 @@ export const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 
   const options = {
     scales: {
-      yAxis: [
+      yAxes: [
         {
           ticks: {
             beginAtZero: true,
@@ -40,18 +43,19 @@ export const LineChart = ({ coinHistory, currentPrice, coinName }) => {
       ],
     },
   }
+
   return (
     <>
       <Row className='chart-header'>
         <Title level={2} className='chart-title'>
-          {coinName} Price Chart
+          {coinName} Price Chart{' '}
         </Title>
         <Col className='price-container'>
           <Title level={5} className='price-change'>
-            {coinHistory?.data?.change} %
+            Change: {coinHistory?.data?.change}%
           </Title>
           <Title level={5} className='current-price'>
-            {coinName} Price: $ {currentPrice} Price Chart
+            Current {coinName} Price: $ {currentPrice}
           </Title>
         </Col>
       </Row>

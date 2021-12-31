@@ -30,7 +30,7 @@ export const App = () => {
                 path='/cryptocurrencies'
                 component={Cryptocurrencies}
               />
-              <Route exact path='/crypto/:id' component={CryptoDetails} />
+              <Route exact path='/crypto/:coinId' component={CryptoDetails} />
               <Route exact path='/news' component={News} />
             </Switch>
           </div>
