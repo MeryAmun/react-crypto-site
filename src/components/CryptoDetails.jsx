@@ -11,16 +11,14 @@ import {
 } from '@ant-design/icons'
 import { Col, Row, Select, Typography } from 'antd'
 import React, { useState } from 'react'
-import {
-  useGetCryptoDetailsQuery,
-  useGetCryptoHistoryQuery,
-} from '../services/cryptoApi'
 
 import HTMLReactParser from 'html-react-parser'
-import { LineChart } from './LineChart'
 import { Loader } from './Loader'
 import millify from 'millify'
+import { useGetCryptoDetailsQuery } from '../services/cryptoApi'
 import { useParams } from 'react-router-dom'
+
+//import { LineChart } from './LineChart'
 
 const { Title, Text } = Typography
 const { Option } = Select
@@ -29,9 +27,9 @@ export const CryptoDetails = () => {
   const { coinId } = useParams()
   const [timeperiod, setTimeperiod] = useState('7d')
   const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
-  const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod })
+  //const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod })
   const cryptoDetails = data?.data?.coin
-  console.log(data)
+  console.log(timeperiod)
 
   if (isFetching) return <Loader />
 
@@ -131,7 +129,7 @@ export const CryptoDetails = () => {
             </p>
           </Col>
           {stats.map(({ icon, title, value }) => (
-            <Col className='coin-stats'>
+            <Col className='coin-stats' key={title}>
               <Col className='coin-stats-name'>
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
@@ -151,7 +149,7 @@ export const CryptoDetails = () => {
             </p>
           </Col>
           {genericStats.map(({ icon, title, value }) => (
-            <Col className='coin-stats'>
+            <Col className='coin-stats' key={title}>
               <Col className='coin-stats-name'>
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
@@ -172,8 +170,8 @@ export const CryptoDetails = () => {
           <Title level={3} className='coin-details-heading'>
             {cryptoDetails.name} Links
           </Title>
-          {cryptoDetails.links?.map((link) => (
-            <Row className='coin-link' key={link.name}>
+          {cryptoDetails.links?.map((link, i) => (
+            <Row className='coin-link' key={i}>
               <Title level={5} className='link-name'>
                 {link.type}
               </Title>

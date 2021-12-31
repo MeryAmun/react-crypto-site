@@ -36,8 +36,10 @@ export const News = ({ simplified }) => {
             }
           >
             <Option value='Cryptocurency'>Cryptocurrency</Option>
-            {data?.data?.coins?.map((currency) => (
-              <Option value={currency.name}>{currency.name}</Option>
+            {data?.data?.coins?.map((currency, i) => (
+              <Option value={currency.name} key={i}>
+                {currency.name}
+              </Option>
             ))}
           </Select>
         </Col>
@@ -51,6 +53,7 @@ export const News = ({ simplified }) => {
                   {news.name}
                 </Title>
                 <img
+                  style={{ maxWidth: '100px', maxHeight: '100px' }}
                   src={news?.image?.thumbnail?.contentUrl || demoImage}
                   alt='news'
                 />
